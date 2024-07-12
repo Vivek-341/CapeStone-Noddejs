@@ -32,14 +32,17 @@ export const loginUser = async (request, response) => {
     }
 
     try {
+        console.log('1');
         let match = await bcrypt.compare(request.body.password, user.password);
+        console.log('2');
         if (match) {
             const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, { expiresIn: '15m'});
             const refreshToken = jwt.sign(user.toJSON(), process.env.REFRESH_SECRET_KEY);
-            
+            console.log('3');
             const newToken = new Token({ token: refreshToken });
+            console.log('4');
             await newToken.save();
-        
+            console.log('5');
             response.status(200).json({ accessToken: accessToken, refreshToken: refreshToken,name: user.name, username: user.username });
         
         } else {
