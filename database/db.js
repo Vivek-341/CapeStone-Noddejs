@@ -6,7 +6,7 @@ const Connection = async (username, password) => {
     try {
         console.log('MongoDB before');
         await mongoose.connect(URL, { useNewUrlParser: true })
-        mongoose.set('strictQuery', false);
+        mongoose.set('strictQuery', true);
             //, { useNewUrlParser: true ,useUnifiedTopology: true,maxPoolSize: 10,socketTimeoutMS: 30000, keepAlive: true})
         console.log('MongoDB is connected');
     } catch (error) {
